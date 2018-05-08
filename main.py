@@ -20,6 +20,7 @@ def read_teacher_data_image_urls_from_viko(urls):
         print('\n', photosUrl[i])
 
 
+
 if __name__ == '__main__':
     domain = 'https://eif.viko.lt/fakultetas/katedros/'
     urls = [domain+"programines-irangos-katedra/programines-irangos-katedros-destytojai/",
@@ -27,15 +28,27 @@ if __name__ == '__main__':
             domain+"kompiuteriu-technikos-ir-telekomunikaciju-katedra/kompiuteriu-sistemu-ir-telekomunikaciju-katedros-destytojai/",
             domain+"informaciniu-sistemu-katedra/informaciniu-sistemu-katedros-destytojai/"]
     pd.set_option('display.max_colwidth', 500)
-    open('destytojai.csv', 'w').close() #pasalinti failo duomenis
-    read_teacher_data_from_viko(urls)
+    #open('destytojai.csv', 'w').close() #pasalinti failo duomenis
+    #read_teacher_data_from_viko(urls)
+
+    teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px">'
+    teacher_div_ul = '<div class="element-item transition metal" data-category="transition"><img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px"><ul class="list-group">'
+    teacher_div_ul_close = '</ul></div>'
+    teacher_li = '<li class="list-group-item">'
 
     for line in open('destytojai.csv'):
         listWords = line.split(" ")
         if listWords[0].lower() == "dr." or listWords[0] == '"Dr.' or listWords[0] == "dr. ":
-            print(listWords[0] + ' ' + listWords[1] + ' ' + listWords[2])
+            print(teacher_div_ul)
+            print(teacher_li + listWords[0] + ' ' + listWords[1] + ' ' + listWords[2] + '</li>')
+            print(teacher_li + listWords[4] + '</li>')
+            print(teacher_div_ul_close)
         else:
-            print(listWords[0] + ' ' + listWords[1])
+            print(teacher_div_ul)
+            print(teacher_li + listWords[0] + ' ' + listWords[1] + '</li>')
+            print(teacher_li + listWords[3] + '</li>')
+            print(teacher_div_ul_close)
+
     # read_teacher_data_image_urls_from_viko(urls)
 
 
