@@ -52,12 +52,12 @@ if __name__ == '__main__':
     for line in open('destytojai.csv'):
         listWords = line.split(" ")
         if listWords[0].lower() == "dr." or listWords[0] == '"Dr.' or listWords[0] == "dr. ":
-            print(teacher_div_ul + '<ul class="list-group">' + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">')
+            print(teacher_div_ul + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">' + '<ul class="list-group">')
             print(teacher_li + listWords[0] + ' ' + listWords[1] + ' ' + listWords[2] + '</li>')
             print(teacher_li + listWords[4] + '</li>')
             print(teacher_div_ul_close)
         else:
-            print(teacher_div_ul + '<ul class="list-group">' + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">')
+            print(teacher_div_ul + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">' + '<ul  class="list-group">')
             print(teacher_li + listWords[0] + ' ' + listWords[1] + '</li>')
             print(teacher_li + listWords[3] + '</li>')
             print(teacher_div_ul_close)
