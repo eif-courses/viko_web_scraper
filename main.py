@@ -37,27 +37,28 @@ if __name__ == '__main__':
     for i in range(len(urls)):
         for j in range(len(read_teacher_data_image_urls_from_viko(urls[i]))):
             teacher_img_src.append(read_teacher_data_image_urls_from_viko(urls[i])[j])
-            print(read_teacher_data_image_urls_from_viko(urls[i])[j])
+            #print(read_teacher_data_image_urls_from_viko(urls[i])[j])
             #read_teacher_data_image_urls_from_viko(urls[i])
-
+    print(teacher_img_src)
     # open('destytojai.csv', 'w').close() #pasalinti failo duomenis
     # read_teacher_data_from_viko(urls)
 
-    # teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px">'
-    # teacher_div_ul = '<div class="element-item transition metal" data-category="transition"><img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px"><ul class="list-group">'
-    # teacher_div_ul_close = '</ul></div>'
-    # teacher_li = '<li class="list-group-item">'
-    #
-    # for line in open('destytojai.csv'):
-    #     listWords = line.split(" ")
-    #     if listWords[0].lower() == "dr." or listWords[0] == '"Dr.' or listWords[0] == "dr. ":
-    #         print(teacher_div_ul)
-    #         print(teacher_li + listWords[0] + ' ' + listWords[1] + ' ' + listWords[2] + '</li>')
-    #         print(teacher_li + listWords[4] + '</li>')
-    #         print(teacher_div_ul_close)
-    #     else:
-    #         print(teacher_div_ul)
-    #         print(teacher_li + listWords[0] + ' ' + listWords[1] + '</li>')
-    #         print(teacher_li + listWords[3] + '</li>')
-    #         print(teacher_div_ul_close)
+    index = 0
+    teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px">'
+    teacher_div_ul = '<div class="element-item transition metal" data-category="transition">'
+    teacher_div_ul_close = '</ul></div>'
+    teacher_li = '<li class="list-group-item">'
 
+    for line in open('destytojai.csv'):
+        listWords = line.split(" ")
+        if listWords[0].lower() == "dr." or listWords[0] == '"Dr.' or listWords[0] == "dr. ":
+            print(teacher_div_ul + '<ul class="list-group">' + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">')
+            print(teacher_li + listWords[0] + ' ' + listWords[1] + ' ' + listWords[2] + '</li>')
+            print(teacher_li + listWords[4] + '</li>')
+            print(teacher_div_ul_close)
+        else:
+            print(teacher_div_ul + '<ul class="list-group">' + ' <img src="'+teacher_img_src[index]+'" align="left" height="246px">')
+            print(teacher_li + listWords[0] + ' ' + listWords[1] + '</li>')
+            print(teacher_li + listWords[3] + '</li>')
+            print(teacher_div_ul_close)
+        index += 1
