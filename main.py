@@ -18,7 +18,30 @@ def read_teacher_data_image_urls_from_viko(url):
     photosUrl.pop()
     return photosUrl
 
+def read_viko_contacts_paga(url):
+    teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="400px">'
+    teacher_div_ul = '<div class="element-item transition metal" data-category="transition">'
+    teacher_div_ul_close = '</ul></div>'
+    teacher_li = '<li class="list-group-item">'
+    p = requests.get(url)
+    tree = html.fromstring(p.content)
+    pareigos = tree.xpath('//p/strong[1]/text()')
+    vardas = tree.xpath('//p/strong[2]/text()')
+    telefonas = tree.xpath('//p/strong[3]/following::text()[1]')
+    kab_nr = tree.xpath('//p/strong[5]/following::text()[1]')
+    for i in range(len(pareigos)):
+        print(teacher_div_ul + teacher_logo + '<ul  class="list-group">')
+        print(teacher_li + vardas[i] + ' ,pareigos:' + pareigos[i] + '</li>')
+        print(teacher_li + 'Tel.' + telefonas[i] + '</li>')
+        print(teacher_li + kab_nr[i] +' kab.' + '</li>')
+        print(teacher_div_ul_close)
+        #print(address[i] + vardas[i])
+
+
 if __name__ == '__main__':
+
+    #read_viko_contacts_paga('https://eif.viko.lt/kontaktai/')
+
     domain = 'https://eif.viko.lt/fakultetas/katedros/'
     viko_urls = [domain + "programines-irangos-katedra/programines-irangos-katedros-destytojai/",
                  domain + "elektronikos-katedra/elektronikos-katedros-destytojai/",
@@ -35,7 +58,7 @@ if __name__ == '__main__':
     save_from_viko_to_csv(viko_urls)
 
     index = 0
-    teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="246px">'
+    teacher_logo = '<img src="https://i1.wp.com/eif.viko.lt/media/uploads/sites/5/2018/04/no_photo.png?fit=150%2C150&ssl=1" align="left" height="400px">'
     teacher_div_ul = '<div class="element-item transition metal" data-category="transition">'
     teacher_div_ul_close = '</ul></div>'
     teacher_li = '<li class="list-group-item">'
